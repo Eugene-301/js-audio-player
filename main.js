@@ -5,6 +5,11 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+if (require("electron-squirrel-startup")) {
+  app.quit();
+  return;
+}
+
 const createWindow = () => {
   const window = new BrowserWindow({
     width: 800,
