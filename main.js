@@ -1,10 +1,17 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron/main";
 import path from "node:path";
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-console.log(path.join(__dirname, "/preload.js"));
+console.log(path.join(__dirname, "preload.js"));
+
+if (!fs.existsSync(path.join(__dirname, "preload.js"))) {
+  console.error("Файл preload.js не найден по пути:", preloadPath);
+} else {
+  console.log("файл найден");
+}
 
 async function handleSquirrelEvent() {
   try {
@@ -24,28 +31,31 @@ handleSquirrelEvent().catch((error) => {
 });
 
 const createWindow = () => {
-  const window = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 800,
     height: 600,
     show: false,
-    autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, "/preload.js"),
+      preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
       nodeIntegration: false,
     },
   });
 
-  window.once("ready-to-show", () => {
-    window.show();
+  win.once("ready-to-show", () => {
+    win.show();
   });
 
-  window.loadFile("index.html");
+  win.loadFile("index.html");
 };
 
 app.on("ready", () => {
   createWindow();
-  ipcMain.handle("ping", () => "pong");
+  ipcMain.handle("ping", () => {
+    console.log("recived ping");
+
+    return "pong";
+  });
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

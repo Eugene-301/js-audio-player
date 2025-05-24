@@ -1,8 +1,4 @@
-
-
 import { contextBridge, ipcRenderer } from ('electron')
-
-console.log("preload script loaded");
 
 
 contextBridge.exposeInMainWorld('versions', {
@@ -12,3 +8,4 @@ contextBridge.exposeInMainWorld('versions', {
   ping: () => ipcRenderer.invoke('ping')
   // we can also expose variables, not just functions
 })
+
