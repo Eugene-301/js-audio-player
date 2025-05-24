@@ -8,7 +8,45 @@
   </head>
   <body>
     <div class="app" id="app">
-      <h1 id="her">adsadsadsa</h1>
+      <div class="songs">
+        <ul class="songs__list">
+          <li class="song__item">
+            <span class="song__image"><img src="" alt="Картинка песни" /></span>
+            <span class="song__data">Название песни Автор песни</span>
+            <span class="song__time">00:00</span>
+          </li>
+        </ul>
+      </div>
+      <div class="mini-player">
+        <div class="mini-player__section">
+          <img src="" alt="Картинка песни" class="mini-player__image" />
+          <span class="mini-player__song-data">Название песни Автор песни</span>
+        </div>
+        <div class="mini-player__section">
+          <img
+            src=""
+            alt="Предыдущая песня"
+            id="previous"
+            class="mini-player__action"
+          />
+          <span>
+            <span class="mini-player__song-time">00:00</span>
+            <img
+              src=""
+              alt="Проигрывать песню"
+              id="play"
+              class="mini-player__action"
+            />
+          </span>
+          <img
+            src=""
+            alt="Следующая песня"
+            id="next"
+            class="mini-player__action"
+          />
+        </div>
+        <div class="mini-player__section"></div>
+      </div>
     </div>
     <script src="./renderer.js"></script>
   </body>
