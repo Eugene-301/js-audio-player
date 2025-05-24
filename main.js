@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 
 if (require("electron-squirrel-startup")) {
   app.quit();
-  return;
 }
 
 const createWindow = () => {
