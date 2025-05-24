@@ -21,11 +21,7 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
-  ipcMain.handle("ping", () => {
-    console.log("recived ping");
-
-    return "pong";
-  });
+  ipcMain.handle("ping", () => "pong");
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
