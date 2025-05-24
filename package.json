@@ -2,7 +2,7 @@
   "name": "js-audio-player",
   "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple desktop audio player app built with Electron",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Eugene-301/js-audio-player.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Eugene-301, Чугунда",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Eugene-301/js-audio-player/issues"
