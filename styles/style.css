@@ -1,7 +1,15 @@
 @import url("./_normalize.css");
+@import url("../components/miniPlayer/miniPlayer.css");
 
 .app {
   width: 100%;
   height: 100%;
   background-color: #4f4f4f;
+  position: relative;
+  color: #ffffff;
+}
+
+.song-image {
+  width: 50px;
+  aspect-ratio: 1/1;
 }
