@@ -1,6 +1,6 @@
 {
   "name": "js-audio-player",
-  "type": "module",
+  "type": "commonjs",
   "version": "1.0.0",
   "description": "A simple desktop audio player app built with Electron",
   "main": "main.js",
