@@ -1,15 +1,16 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+console.log(path.join(__dirname, "/preload.js"));
 
 async function handleSquirrelEvent() {
   try {
     const squirrelStartup = await import("electron-squirrel-startup");
     if (squirrelStartup.default) {
-      app.quit(); // Завершаем приложение, если это событие Squirrel
+      app.quit();
       return true;
     }
   } catch (error) {
@@ -29,7 +30,9 @@ const createWindow = () => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "/preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
     },
   });
 
@@ -42,6 +45,7 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
+  ipcMain.handle("ping", () => "pong");
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
