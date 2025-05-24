@@ -1,9 +1,17 @@
-const { app, BrowserWindow } = require("electron");
+import { app, BrowserWindow } from "electron";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url); // Получаем путь к текущему файлу
+const __dirname = path.dirname(__filename);
 
 const createWindow = () => {
   const window = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+    },
   });
 
   window.loadFile("index.html");
