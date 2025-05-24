@@ -5,9 +5,22 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-if (require("electron-squirrel-startup")) {
-  app.quit();
+async function handleSquirrelEvent() {
+  try {
+    const squirrelStartup = await import("electron-squirrel-startup");
+    if (squirrelStartup.default) {
+      app.quit(); // Завершаем приложение, если это событие Squirrel
+      return true;
+    }
+  } catch (error) {
+    console.error("Failed to load electron-squirrel-startup:", error);
+  }
+  return false;
 }
+
+handleSquirrelEvent().catch((error) => {
+  console.log(error);
+});
 
 const createWindow = () => {
   const window = new BrowserWindow({
